@@ -32,8 +32,8 @@ class DaysProvider extends ChangeNotifier {
           listaDias.add(
             WeatherDay(
               fecha: element['dt_txt'],
-              temp_min: element['main']['temp_min'].toString(),
-              temp_max: element['main']['temp_max'].toString(),
+              temp_min: element['main']['temp_min'].toString().split(".")[0],
+              temp_max: element['main']['temp_max'].toString().split(".")[0],
               description: element['weather'][0]['description'],
             ),
           );
