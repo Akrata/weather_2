@@ -20,23 +20,24 @@ class DaysProvider extends ChangeNotifier {
     'units': 'metric',
     'lang': 'sp'
   });
+  List<WeatherDay> listaDias = [];
   Future<List<WeatherDay>> getDays() async {
-    List<WeatherDay> listaDias = [];
     final response = await http.get(url);
     print(response.statusCode);
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
       // print(jsonResponse);
-
-      for (var element in jsonResponse['list']) {
-        listaDias.add(
-          WeatherDay(
-            fecha: element['dt_txt'],
-            temp_min: element['main']['temp_min'],
-            temp_max: element['main']['temp_max'],
-            description: element['weather'][0]['description'],
-          ),
-        );
+      if (listaDias.isEmpty) {
+        for (var element in jsonResponse['list']) {
+          listaDias.add(
+            WeatherDay(
+              fecha: element['dt_txt'],
+              temp_min: element['main']['temp_min'].toString(),
+              temp_max: element['main']['temp_max'].toString(),
+              description: element['weather'][0]['description'],
+            ),
+          );
+        }
       }
 
       // final data = WeatherDay.fromJson(jsonResponse);

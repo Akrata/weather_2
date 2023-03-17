@@ -1,7 +1,7 @@
 class WeatherDay {
   final String fecha;
-  final double temp_min;
-  final double temp_max;
+  final String temp_min;
+  final String temp_max;
   final String description;
 
   WeatherDay(
