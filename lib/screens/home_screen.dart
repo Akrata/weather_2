@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app2/providers/today_provider.dart';
 
 import '../providers/days_provider.dart';
 
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final daysProvider = Provider.of<DaysProvider>(context);
+    final todayProvider = Provider.of<TodayProvider>(context);
     final lista = daysProvider.listaDias;
     return Scaffold(
       appBar: AppBar(
@@ -26,14 +28,14 @@ class HomeScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "TITULO",
+                    "${todayProvider.temp.round()}°",
                     style: TextStyle(fontSize: 100),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   Text(
-                    daysProvider.ciudad,
+                    "${todayProvider.country_city}",
                     style: TextStyle(fontSize: 30),
                   ),
                   SizedBox(
@@ -41,21 +43,62 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Container(
                     height: 60,
-                    color: Colors.black12,
+                    // color: Colors.black12,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          width: 80,
-                          color: Colors.red,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey.shade500),
+                          width: 100,
+                          // color: Colors.grey.shade500,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("Min."),
+                              Text("${todayProvider.temp_min.round()}°")
+                            ],
+                          ),
                         ),
                         Container(
-                          width: 80,
-                          color: Colors.red,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey.shade500),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("Max."),
+                              Text("${todayProvider.temp_max.round()}°")
+                            ],
+                          ),
                         ),
                         Container(
-                          width: 80,
-                          color: Colors.red,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey.shade500),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("Humedad"),
+                              Text("${todayProvider.humidity} %")
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey.shade500),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("Viento"),
+                              Text("${todayProvider.wind} Km/h")
+                            ],
+                          ),
                         ),
                       ],
                     ),

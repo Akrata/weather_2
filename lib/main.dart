@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/providers/days_provider.dart';
+import 'package:weather_app2/providers/today_provider.dart';
 import 'package:weather_app2/screens/home_screen.dart';
 
 void main() {
@@ -16,7 +17,10 @@ class StateApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => DaysProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TodayProvider(),
+        ),
       ],
       child: MainApp(),
     );
