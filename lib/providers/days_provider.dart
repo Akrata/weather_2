@@ -9,7 +9,8 @@ class DaysProvider extends ChangeNotifier {
   // final appid = 'ea11dcb1d1126a5b47a0ed82589a448f';
   // final units = 'metric';
   // final lang = 'sp';
-
+  List<WeatherDay> listaDias = [];
+  String ciudad = "";
   DaysProvider() {
     getDays();
   }
@@ -20,13 +21,16 @@ class DaysProvider extends ChangeNotifier {
     'units': 'metric',
     'lang': 'sp'
   });
-  List<WeatherDay> listaDias = [];
+
   Future<List<WeatherDay>> getDays() async {
     final response = await http.get(url);
     print(response.statusCode);
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
       // print(jsonResponse);
+      ciudad =
+          '${jsonResponse['city']['name']}, ${jsonResponse['city']['country']}';
+
       if (listaDias.isEmpty) {
         for (var element in jsonResponse['list']) {
           listaDias.add(
